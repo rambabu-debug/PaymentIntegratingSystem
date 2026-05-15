@@ -1,0 +1,203 @@
+{
+  "info": {
+    "name": "Payment Integration System - Testing",
+    "description": "Complete API testing collection for merchant payment system",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Merchant",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"merchant@example.com\",\n  \"password\": \"SecurePassword@123\",\n  \"role\": \"merchant\",\n  \"businessName\": \"My Online Store\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Register a new merchant account. Returns JWT token."
+          },
+          "response": []
+        },
+        {
+          "name": "Register Client",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"client@example.com\",\n  \"password\": \"ClientPassword@123\",\n  \"role\": \"client\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/register",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            },
+            "description": "Register a new client account."
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"merchant@example.com\",\n  \"password\": \"SecurePassword@123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            },
+            "description": "Login and get JWT token. Copy the token from response and use in Authorization header for protected endpoints."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Database Check",
+      "item": [
+        {
+          "name": "H2 Console (View Data)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "http://localhost:8080/h2-console",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "h2-console"
+              ]
+            },
+            "description": "Open H2 database console in browser to view stored data.\nJDBC URL: jdbc:h2:mem:paymentdb\nUsername: sa\nPassword: (leave blank)\n\nRun these SQL queries to check data:\n- SELECT * FROM users;\n- SELECT * FROM merchant_profiles;"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Stripe Webhooks",
+      "item": [
+        {
+          "name": "Test Webhook (charge.succeeded)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Stripe-Signature",
+                "value": "test_signature"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"evt_test_succeeded\",\n  \"type\": \"charge.succeeded\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"ch_test_1234\",\n      \"amount\": 5000,\n      \"currency\": \"usd\",\n      \"status\": \"succeeded\",\n      \"payment_method_details\": {\n        \"card\": {\n          \"brand\": \"visa\",\n          \"last4\": \"4242\"\n        }\n      }\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/webhooks/stripe",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "webhooks",
+                "stripe"
+              ]
+            },
+            "description": "Test Stripe webhook. This is a public endpoint (no auth required).\nIn production, use stripe-cli to test: stripe listen --forward-to localhost:8080/api/webhooks/stripe"
+          },
+          "response": []
+        },
+        {
+          "name": "Test Webhook (charge.failed)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"evt_test_failed\",\n  \"type\": \"charge.failed\",\n  \"data\": {\n    \"object\": {\n      \"id\": \"ch_test_failed\",\n      \"amount\": 5000,\n      \"currency\": \"usd\",\n      \"status\": \"failed\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/webhooks/stripe",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8080",
+              "path": [
+                "api",
+                "webhooks",
+                "stripe"
+              ]
+            },
+            "description": "Test failed charge webhook."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
+
