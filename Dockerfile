@@ -14,7 +14,8 @@ COPY settings.gradle .
 COPY src src
 
 # Build the application
-RUN chmod +x gradlew && ./gradlew build -x test
+RUN chmod +x ./gradlew
+RUN ./gradlew clean build -x test --no-daemon
 
 # Expose port
 EXPOSE 8080
