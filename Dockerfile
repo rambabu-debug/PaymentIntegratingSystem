@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jdk
+FROM eclipse-temurin:21-jdk
 
 # Set working directory
 WORKDIR /app
@@ -15,7 +15,7 @@ COPY src src
 
 # Build the application
 RUN chmod +x ./gradlew
-RUN ./gradlew clean build -x test --no-daemon
+RUN ./gradlew clean build -x test --no-daemon -Dorg.gradle.java.home=/opt/java/openjdk
 
 # Expose port
 EXPOSE 8080
