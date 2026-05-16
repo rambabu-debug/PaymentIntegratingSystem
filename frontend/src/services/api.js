@@ -2,7 +2,7 @@ import axios from 'axios'
  // const API_BASE_URL = 'http://localhost:7070/api'
 
 const api = axios.create({
-  baseURL: '${import.meta.env.https://paymentintegratingsystem.onrender.com}/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://paymentintegratingsystem.onrender.com/api',
   headers: {
     'Content-Type': 'application/json',
   },

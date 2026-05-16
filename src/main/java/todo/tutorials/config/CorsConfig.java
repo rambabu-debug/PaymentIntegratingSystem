@@ -18,7 +18,7 @@ public class CorsConfig {
                 registry.addMapping("/**")
                         .allowedOrigins(
                                 "http://localhost:5001",
-                                "https://https://payment-integrating-system-gacu.vercel.app"
+                                "https://payment-integrating-system-gacu.vercel.app"
                         )
                         .allowedMethods("*")
                         .allowedHeaders("*")
