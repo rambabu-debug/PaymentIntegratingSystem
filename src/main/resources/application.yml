@@ -28,11 +28,11 @@ firebase:
 
 app:
   jwt:
-    secret: ${JWT_SECRET}
+    secret: ${JWT_SECRET:MyDefaultSecretKey1234567890@#MySecretKey}
     expiration-ms: ${JWT_EXPIRATION_MS:3600000}
   stripe:
-    secret-key: ${STRIPE_SECRET_KEY}
-    webhook-secret: ${STRIPE_WEBHOOK_SECRET}
+    secret-key: ${STRIPE_SECRET_KEY:sk_test_default}
+    webhook-secret: ${STRIPE_WEBHOOK_SECRET:whsec_test_default}
 
 logging:
   level:
