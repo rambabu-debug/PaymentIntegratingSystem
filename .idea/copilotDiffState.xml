@@ -3,6 +3,15 @@
   <component name="CopilotDiffPersistence">
     <option name="pendingDiffs">
       <map>
+        <entry key="/Dockerfile (snapshot)">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="/Dockerfile (snapshot)" />
+              <option name="originalContent" value="FROM eclipse-temurin:17-jdk&#10;&#10;# Set working directory&#10;WORKDIR /app&#10;&#10;# Copy gradle files&#10;COPY gradlew .&#10;COPY gradlew.bat .&#10;COPY gradle gradle&#10;&#10;# Copy source code&#10;COPY build.gradle .&#10;COPY settings.gradle .&#10;COPY src src&#10;&#10;# Build the application&#10;RUN chmod +x ./gradlew&#10;RUN ./gradlew clean build -x test --no-daemon&#10;&#10;# Expose port&#10;EXPOSE 8080&#10;&#10;# Set environment variables (Read from build args or environment)&#10;ENV SERVER_PORT=8080&#10;ENV DB_URL=jdbc:h2:mem:paymentdb&#10;ENV FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}&#10;ENV STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}&#10;ENV STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}&#10;ENV JWT_SECRET=${JWT_SECRET}&#10;&#10;# Run the application&#10;CMD [&quot;java&quot;, &quot;-jar&quot;, &quot;build/libs/PaymentIntegrationSystem-1.0.0.jar&quot;]&#10;&#10;" />
+              <option name="updatedContent" value="FROM eclipse-temurin:21-jdk&#10;&#10;# Set working directory&#10;WORKDIR /app&#10;&#10;# Copy gradle files&#10;COPY gradlew .&#10;COPY gradlew.bat .&#10;COPY gradle gradle&#10;&#10;# Copy source code&#10;COPY build.gradle .&#10;COPY settings.gradle .&#10;COPY src src&#10;&#10;# Build the application&#10;RUN chmod +x ./gradlew&#10;RUN ./gradlew clean build -x test --no-daemon -Dorg.gradle.java.home=/opt/java/openjdk&#10;&#10;# Expose port&#10;EXPOSE 8080&#10;&#10;# Set environment variables (Read from build args or environment)&#10;ENV SERVER_PORT=8080&#10;ENV DB_URL=jdbc:h2:mem:paymentdb&#10;ENV FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}&#10;ENV STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}&#10;ENV STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}&#10;ENV JWT_SECRET=${JWT_SECRET}&#10;&#10;# Run the application&#10;CMD [&quot;java&quot;, &quot;-jar&quot;, &quot;build/libs/PaymentIntegrationSystem-1.0.0.jar&quot;]&#10;&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
         <entry key="/build (snapshot).gradle">
           <value>
             <PendingDiffInfo>
